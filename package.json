@@ -1,0 +1,20 @@
+{
+  "name": "server-sent-events",
+  "description": "Send server messages to the browser (via EventSource).",
+  "version": "0.0.1",
+  "author": {
+    "name": "Zac Barton"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zacbarton/node-server-sent-events"
+  },
+  "keywords": [
+  	"express"
+  	, "middleware"
+  	, "eventsource"
+  	, "sse"
+  	, "server-sent"
+  	, "events"
+  ]
+}
