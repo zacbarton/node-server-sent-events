@@ -16,6 +16,7 @@ Installation
 Usage (with express)
 --------
 
+```javascript
 // require sse
 var sse = require('server-sent-events');
 var express = require('express');
