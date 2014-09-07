@@ -1,7 +1,7 @@
 server-sent-events
 ========
 
-Send server messages to the browser (via EventSource).
+Express middleware to push events/messages from the server to the browser, using EventSource.
 
 This middleware will keep the request stream open indefinitely, pad the initial response stream for IE and flush the response if the connect middleware is in use.
 
