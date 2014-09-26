@@ -3,7 +3,7 @@ server-sent-events
 
 Express middleware to push events/messages from the server to the browser, using EventSource.
 
-This middleware will keep the request stream open indefinitely, pad the initial response stream for IE and flush the response if the connect middleware is in use.
+This middleware will keep the request stream open indefinitely, pad the initial response stream for IE and flush the response if the compression middleware is in use.
 
 Detailed information on how to setup the browser/client can be found [here][1].
 
