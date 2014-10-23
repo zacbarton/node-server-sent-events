@@ -11,14 +11,24 @@ function sse(req, res, next) {
 	res.write(':' + Array(2049).join(' ') + '\n');
 	res.write('retry: 2000\n');
 
+	// export a function to send server-side-events
 	res.sse = function(string) {
 		res.write(string);
 		
 		// support running with the compression middleware
-		if (string.match(/\n\n$/) && res.flush) {
+		if (res.flush && string.match(/\n\n$/)) {
 			res.flush();
 		}
 	};
+
+	// keep the connection open by sending a comment
+	var keepAlive = setInterval(function() {
+    	res.sse(':keep-alive \n\n');
+	}, 20000);
+
+	res.on('close', function() {
+		clearInterval(keepAlive);
+	});
 
 	next();
 }
