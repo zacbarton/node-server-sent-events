@@ -7,25 +7,27 @@ function sse(req, res, next) {
 	res.setHeader('Connection', 'keep-alive');
 	res.status(200);
 
-	// https://github.com/TravelingTechGuy/express-eventsource/blob/master/models/eventsource.js#L20
-	res.write(':' + Array(2049).join(' ') + '\n');
-	res.write('retry: 2000\n');
-
 	// export a function to send server-side-events
 	res.sse = function(string) {
 		res.write(string);
 		
-		// support running with the compression middleware
+		// support running within the compression middleware
 		if (res.flush && string.match(/\n\n$/)) {
 			res.flush();
 		}
 	};
 
+	// write 2kB of padding (for IE) and a reconnection timeout
+	// then use res.sse to send to the client
+	res.write(':' + Array(2049).join(' ') + '\n');
+	res.sse('retry: 2000\n\n');
+
 	// keep the connection open by sending a comment
 	var keepAlive = setInterval(function() {
-    	res.sse(':keep-alive \n\n');
+    	res.sse(':keep-alive\n\n');
 	}, 20000);
 
+	// cleanup on close
 	res.on('close', function() {
 		clearInterval(keepAlive);
 	});

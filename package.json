@@ -1,7 +1,7 @@
 {
   "name": "server-sent-events",
   "description": "Express middleware to push events/messages from the server to the browser, using EventSource.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": {
     "name": "Zac Barton"
   },
